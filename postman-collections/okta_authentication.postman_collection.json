@@ -1,0 +1,1557 @@
+{
+	"info": {
+		"_postman_id": "b87fe9e8-5622-4298-af8b-098b78e0fab4",
+		"name": "Authentication (Okta API)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23533113"
+	},
+	"item": [
+		{
+			"name": "Enroll",
+			"item": [
+				{
+					"name": "List Questions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/v1/users/{{userId}}/factors/questions",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"{{userId}}",
+								"factors",
+								"questions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Enroll Question Factor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"stateToken\": \"{{stateToken}}\",\n  \"factorType\": \"question\",\n  \"provider\": \"OKTA\",\n  \"profile\": {\n    \"question\": \"name_of_first_plush_toy\",\n    \"answer\": \"blah\"\n  }\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/authn/factors",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authn",
+								"factors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Enroll SMS Factor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"stateToken\": \"{{stateToken}}\",\n  \"factorType\": \"sms\",\n  \"provider\": \"OKTA\",\n  \"profile\": {\n    \"phoneNumber\" :  \"+1 415 555 5555\"\n  }\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/authn/factors",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authn",
+								"factors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Enroll SMS Factor with New Number",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"stateToken\": \"{{stateToken}}\",\n  \"factorType\": \"sms\",\n  \"provider\": \"OKTA\",\n  \"profile\": {\n    \"phoneNumber\":  \"+1 415 555 5555\"\n  }\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/authn/factors?updatePhone=true",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authn",
+								"factors"
+							],
+							"query": [
+								{
+									"key": "updatePhone",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Enroll Email Factor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"stateToken\": \"{{stateToken}}\",\n  \"factorType\": \"email\",\n  \"provider\": \"OKTA\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/authn/factors",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authn",
+								"factors"
+							]
+						},
+						"description": "This request does not specify the Email address to enroll;  implicitly the primary Email address from the user's profile is always used.\n\nIf the Email factor is REQUIRED by MFA enrollment policy then the Email factor will be enrolled (and activated) automatically, and these API calls to enroll and activate the Email factor are unnecessary;  generally these API calls are only pertinent if the Email factor is OPTIONAL."
+					},
+					"response": []
+				},
+				{
+					"name": "Enroll Okta TOTP Factor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"stateToken\" : \"{{stateToken}}\",\n  \"factorType\": \"token:software:totp\",\n  \"provider\": \"OKTA\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/authn/factors",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authn",
+								"factors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Enroll Okta Verify Push  Factor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"stateToken\" : \"{{stateToken}}\",\n  \"factorType\": \"push\",\n  \"provider\": \"OKTA\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/authn/factors",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authn",
+								"factors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Enroll Google Authenticator Factor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"stateToken\" : \"{{stateToken}}\",\n  \"factorType\": \"token:software:totp\",\n  \"provider\": \"GOOGLE\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/authn/factors",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authn",
+								"factors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Enroll RSA SecurID Factor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"stateToken\": \"{{stateToken}}\",\n  \"factorType\": \"token:hardware\",\n  \"provider\": \"YUBICO\",\n  \"passCode\": \"cccccceukngdfgkukfctkcvfidnetljjiknckkcjulji\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/authn/factors",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authn",
+								"factors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Enroll Symantec VIP Factor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"stateToken\": \"{{stateToken}}\",\n  \"factorType\": \"token\",\n  \"provider\": \"SYMANTEC\",\n  \"profile\": {\n    \"credentialId\": \"VSMT14393584\"\n  },\n  \"passCode\": \"875498\",\n  \"nextPassCode\": \"678195\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/authn/factors",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authn",
+								"factors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Enroll YubiKey Factor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"stateToken\": \"{{stateToken}}\",\n  \"factorType\": \"token\",\n  \"provider\": \"RSA\",\n  \"profile\": {\n    \"credentialId\": \"{{username}}\"\n  },\n  \"passCode\": \"5275875498\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/authn/factors",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authn",
+								"factors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Activate SMS Factor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"stateToken\": \"{{stateToken}}\",\n  \"passCode\": \"679682\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/authn/factors/{{factorId}}/lifecycle/activate",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authn",
+								"factors",
+								"{{factorId}}",
+								"lifecycle",
+								"activate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Activate Email Factor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"stateToken\": \"{{stateToken}}\",\n  \"passCode\": \"679682\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/authn/factors/{{factorId}}/lifecycle/activate",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authn",
+								"factors",
+								"{{factorId}}",
+								"lifecycle",
+								"activate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Activate TOTP Factor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"stateToken\": \"{{stateToken}}\",\n  \"passCode\": \"679682\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/authn/factors/{{factorId}}/lifecycle/activate",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authn",
+								"factors",
+								"{{factorId}}",
+								"lifecycle",
+								"activate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Activate Push Factor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"stateToken\": \"{{stateToken}}\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/authn/factors/{{factorId}}/lifecycle/activate",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authn",
+								"factors",
+								"{{factorId}}",
+								"lifecycle",
+								"activate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Forgot Password",
+			"item": [
+				{
+					"name": "Forgot Password with Email Factor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"{{username}}\",\n  \"factorType\": \"EMAIL\",\n  \"relayState\": \"/myapp/some/deep/link/i/want/to/return/to\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/authn/recovery/password",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authn",
+								"recovery",
+								"password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot Password with SMS Factor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"{{username}}\",\n  \"factorType\": \"SMS\",\n  \"relayState\": \"/myapp/some/deep/link/i/want/to/return/to\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/authn/recovery/password",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authn",
+								"recovery",
+								"password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot Password for Trusted Application",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "SSWS {{apikey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"{{username}}\",\n  \"relayState\": \"{{relayState}}\"\n}  "
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/authn/recovery/password",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authn",
+								"recovery",
+								"password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify SMS Recovery Factor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"stateToken\": \"{{stateToken}}\",\n  \"passCode\": \"123456\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/authn/recovery/factors/sms/verify",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authn",
+								"recovery",
+								"factors",
+								"sms",
+								"verify"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify Recovery Token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"recoveryToken\": \"{{recoveryToken}}\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/authn/recovery/token",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authn",
+								"recovery",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Answer Recovery Question",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"stateToken\": \"{{stateToken}}\",\n  \"answer\": \"Annie Oakley\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/authn/recovery/answer",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authn",
+								"recovery",
+								"answer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"stateToken\": \"{{stateToken}}\",\n  \"newPassword\": \"Ch-ch-ch-ch-Chang3s!\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/authn/credentials/reset_password",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authn",
+								"credentials",
+								"reset_password"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Self-Service Unlock",
+			"item": [
+				{
+					"name": "Unlock Account with Email Factor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"{{username}}\",\n  \"factorType\": \"EMAIL\",\n  \"relayState\": \"/myapp/some/deep/link/i/want/to/return/to\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/authn/recovery/unlock",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authn",
+								"recovery",
+								"unlock"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unlock Account with SMS Factor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"{{username}}\",\n  \"factorType\": \"SMS\",\n  \"relayState\": \"/myapp/some/deep/link/i/want/to/return/to\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/authn/recovery/unlock",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authn",
+								"recovery",
+								"unlock"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unlock Account with  Trusted Application",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "SSWS {{apikey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"{{username}}\",\n  \"relayState\": \"{{relayState}}\"\n}  "
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/authn/recovery/unlock",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authn",
+								"recovery",
+								"unlock"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify SMS Recovery Factor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"stateToken\": \"{{stateToken}}\",\n  \"passCode\": \"123456\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/authn/recovery/factors/sms/verify",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authn",
+								"recovery",
+								"factors",
+								"sms",
+								"verify"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify Recovery Token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"recoveryToken\": \"{{recoveryToken}}\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/authn/recovery/token",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authn",
+								"recovery",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Answer Recovery Question",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"stateToken\": \"{{stateToken}}\",\n  \"answer\": \"Annie Oakley\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/authn/recovery/answer",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authn",
+								"recovery",
+								"answer"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "State Management",
+			"item": [
+				{
+					"name": "Get Transaction  State",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"stateToken\": \"{{stateToken}}\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/authn",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authn"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Skip Transaction State",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"stateToken\": \"{{stateToken}}\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/authn/skip",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authn",
+								"skip"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Previous Transaction State",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"stateToken\": \"{{stateToken}}\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/authn/previous",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authn",
+								"previous"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel Transaction",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"stateToken\": \"{{stateToken}}\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/authn/cancel",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authn",
+								"cancel"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Verify",
+			"item": [
+				{
+					"name": "Send SMS Challenge (OTP)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"stateToken\": \"{{stateToken}}\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/authn/factors/{{factorId}}/verify",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authn",
+								"factors",
+								"{{factorId}}",
+								"verify"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send Email Challenge (OTP)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"stateToken\": \"{{stateToken}}\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/authn/factors/{{factorId}}/verify",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authn",
+								"factors",
+								"{{factorId}}",
+								"verify"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify Question Factor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"stateToken\": \"{{stateToken}}\",\n  \"answer\": \"Annie Oakley\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/authn/factors/{{factorId}}/verify",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authn",
+								"factors",
+								"{{factorId}}",
+								"verify"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify SMS Factor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"stateToken\": \"{{stateToken}}\",\n  \"passCode\": \"029656\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/authn/factors/{{factorId}}/verify",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authn",
+								"factors",
+								"{{factorId}}",
+								"verify"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify Email Factor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"stateToken\": \"{{stateToken}}\",\n  \"passCode\": \"029656\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/authn/factors/{{factorId}}/verify",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authn",
+								"factors",
+								"{{factorId}}",
+								"verify"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify TOTP Factor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"stateToken\": \"{{stateToken}}\",\n  \"passCode\": \"029656\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/authn/factors/{{factorId}}/verify",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authn",
+								"factors",
+								"{{factorId}}",
+								"verify"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": " Verify and Poll Push Factor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"stateToken\": \"{{stateToken}}\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/authn/factors/{{factorId}}/verify",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authn",
+								"factors",
+								"{{factorId}}",
+								"verify"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Resend Challenge",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"stateToken\": \"{{stateToken}}\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/authn/factors/{{factorId}}/verify/resend",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authn",
+								"factors",
+								"{{factorId}}",
+								"verify",
+								"resend"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Primary Authentication ",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"{{username}}\",\n  \"password\": \"{{password}}\",\n  \"options\": {\n    \"multiOptionalFactorEnroll\": true,\n    \"warnBeforePasswordExpired\": true\n  }  \n}"
+				},
+				"url": {
+					"raw": "{{url}}/api/v1/authn",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"authn"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Primary Authentication with Trusted Application",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "SSWS {{apikey}}"
+					},
+					{
+						"key": "X-Fowarded-For",
+						"value": "23.235.46.133",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"{{username}}\",\n  \"password\" : \"{{password}}\",\n  \"relayState\": \"{{relayState}}\",\n  \"options\": {\n    \"multiOptionalFactorEnroll\": true,\n    \"warnBeforePasswordExpired\": true\n  },  \n  \"context\": {\n    \"deviceToken\": \"26q43Ak9Eh04p7H6Nnx0m69JqYOrfVBY\"\n  }\n}  "
+				},
+				"url": {
+					"raw": "{{url}}/api/v1/authn",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"authn"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change Password",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"stateToken\": \"{{stateToken}}\",\n  \"oldPassword\" : \"3EMaPQ7x\",\n  \"newPassword\" : \"Ch-ch-ch-ch-Chang3s!\"\n}  "
+				},
+				"url": {
+					"raw": "{{url}}/api/v1/authn/credentials/change_password",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"authn",
+						"credentials",
+						"change_password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Poll for Factor enrollment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"stateToken\": \"{{stateToken}}\",\n  \"factorType\": \"push\",\n  \"provider\": \"OKTA\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/api/v1/authn/factors/{{factorId}}/lifecycle/activate/poll",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"authn",
+						"factors",
+						"{{factorId}}",
+						"lifecycle",
+						"activate",
+						"poll"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

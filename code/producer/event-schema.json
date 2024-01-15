@@ -1,0 +1,6 @@
+{
+    "connector_name": "string, unique, not null",
+    "connection_id": "GUID string, primary key",
+    "event_data": "{} varies from provider to provider",
+    "received_time": "ISO timestamp, not unique, not null"
+}

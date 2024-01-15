@@ -1,0 +1,268 @@
+{
+	"info": {
+		"_postman_id": "d4ce9cf6-ddd1-42cb-a84e-9162405694f5",
+		"name": "Eventbrite API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23533113"
+	},
+	"item": [
+		{
+			"name": "me/organizations/read",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL_API}}/v3/users/me/organizations/",
+					"host": [
+						"{{BASE_URL_API}}"
+					],
+					"path": [
+						"v3",
+						"users",
+						"me",
+						"organizations",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "organizations/:id/events/read",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{BASE_URL_API}}/v3/organizations/1933638216873/events/",
+					"host": [
+						"{{BASE_URL_API}}"
+					],
+					"path": [
+						"v3",
+						"organizations",
+						"1933638216873",
+						"events",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "organizations/:id/events/create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"event\": {\r\n    \"name\": {\r\n      \"html\": \"<p>New Event - Test Kafka Producer</p>\"\r\n    },\r\n    \"description\": {\r\n      \"html\": \"<p>None</p>\"\r\n    },\r\n    \"start\": {\r\n      \"timezone\": \"UTC\",\r\n      \"utc\": \"2023-12-13T02:00:00Z\"\r\n    },\r\n    \"end\": {\r\n      \"timezone\": \"UTC\",\r\n      \"utc\": \"2023-12-15T02:00:00Z\"\r\n    },\r\n    \"currency\": \"USD\",\r\n    \"online_event\": false,\r\n    \"organizer_id\": \"\",\r\n    \"listed\": false,\r\n    \"shareable\": false,\r\n    \"invite_only\": false,\r\n    \"show_remaining\": true,\r\n    \"password\": \"12345\",\r\n    \"capacity\": 100,\r\n    \"is_reserved_seating\": true,\r\n    \"show_pick_a_seat\": true,\r\n    \"show_seatmap_thumbnail\": true,\r\n    \"show_colors_in_seatmap_thumbnail\": true,\r\n    \"locale\": \"de_AT\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL_API}}/v3/organizations/1933638216873/events/",
+					"host": [
+						"{{BASE_URL_API}}"
+					],
+					"path": [
+						"v3",
+						"organizations",
+						"1933638216873",
+						"events",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/events/:id/update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"event\": {\r\n    \"name\": {\r\n      \"html\": \"<p>Event Updated Again from API</p>\"\r\n    },\r\n    \"description\": {\r\n      \"html\": \"<p>None</p>\"\r\n    },\r\n    \"start\": {\r\n      \"timezone\": \"UTC\",\r\n      \"utc\": \"2023-12-12T02:00:00Z\"\r\n    },\r\n    \"end\": {\r\n      \"timezone\": \"UTC\",\r\n      \"utc\": \"2023-12-14T02:00:00Z\"\r\n    },\r\n    \"currency\": \"USD\",\r\n    \"online_event\": false,\r\n    \"organizer_id\": \"\",\r\n    \"listed\": false,\r\n    \"shareable\": false,\r\n    \"invite_only\": false,\r\n    \"show_remaining\": true,\r\n    \"password\": \"12345\",\r\n    \"capacity\": 100,\r\n    \"is_reserved_seating\": true,\r\n    \"show_pick_a_seat\": true,\r\n    \"show_seatmap_thumbnail\": true,\r\n    \"show_colors_in_seatmap_thumbnail\": true,\r\n    \"locale\": \"de_AT\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL_API}}/v3/events/775246482097/",
+					"host": [
+						"{{BASE_URL_API}}"
+					],
+					"path": [
+						"v3",
+						"events",
+						"775246482097",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "events/:id/delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL_API}}/v3/events/775245449007/",
+					"host": [
+						"{{BASE_URL_API}}"
+					],
+					"path": [
+						"v3",
+						"events",
+						"775245449007",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "tokenName",
+				"value": "eventbrite-all",
+				"type": "string"
+			},
+			{
+				"key": "tokenRequestParams",
+				"value": [
+					{
+						"key": "client_id",
+						"value": "{{EVENTBRITE_CLIENT_ID}}",
+						"enabled": true,
+						"send_as": "request_body"
+					},
+					{
+						"key": "client_secret",
+						"value": "{{EVENTBRITE_CLIENT_SECRET}}",
+						"enabled": true,
+						"send_as": "request_body"
+					}
+				],
+				"type": "any"
+			},
+			{
+				"key": "clientSecret",
+				"value": "{{EVENTBRITE_CLIENT_SECRET}}",
+				"type": "string"
+			},
+			{
+				"key": "clientId",
+				"value": "{{EVENTBRITE_CLIENT_ID}}",
+				"type": "string"
+			},
+			{
+				"key": "accessTokenUrl",
+				"value": "{{BASE_URL_AUTH}}/token",
+				"type": "string"
+			},
+			{
+				"key": "authUrl",
+				"value": "{{BASE_URL_AUTH}}/authorize",
+				"type": "string"
+			},
+			{
+				"key": "scope",
+				"value": "",
+				"type": "string"
+			},
+			{
+				"key": "refreshRequestParams",
+				"value": [],
+				"type": "any"
+			},
+			{
+				"key": "authRequestParams",
+				"value": [],
+				"type": "any"
+			},
+			{
+				"key": "challengeAlgorithm",
+				"value": "S256",
+				"type": "string"
+			},
+			{
+				"key": "useBrowser",
+				"value": true,
+				"type": "boolean"
+			},
+			{
+				"key": "grant_type",
+				"value": "authorization_code",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			},
+			{
+				"key": "client_authentication",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL_API",
+			"value": "https://www.eventbriteapi.com",
+			"type": "string"
+		},
+		{
+			"key": "BASE_URL_AUTH",
+			"value": "https://www.eventbrite.com/oauth",
+			"type": "string"
+		},
+		{
+			"key": "EVENTBRITE_CLIENT_ID",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "EVENTBRITE_CLIENT_SECRET",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

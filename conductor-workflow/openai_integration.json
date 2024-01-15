@@ -1,0 +1,60 @@
+{
+  "createTime": 1705061189101,
+  "updateTime": 1705061269862,
+  "name": "openai_integration",
+  "description": "Get completion from openai GPT3.5",
+  "version": 1,
+  "tasks": [
+    {
+      "name": "get_completion",
+      "taskReferenceName": "get_completion_ref",
+      "inputParameters": {
+        "uri": "https://api.openai.com/v1/chat/completions",
+        "method": "POST",
+        "connectionTimeOut": 3000,
+        "readTimeOut": "3000",
+        "accept": "application/json",
+        "contentType": "application/json",
+        "headers": {
+          "Authorization": "Bearer ${workflow.secrets.integration_wf_openai_api_key}"
+        },
+        "body": {
+          "model": "gpt-3.5-turbo",
+          "temperature": "0.7",
+          "messages": [
+            {
+              "role": "user",
+              "content": "${workflow.input.question}"
+            }
+          ]
+        }
+      },
+      "type": "HTTP",
+      "decisionCases": {},
+      "defaultCase": [],
+      "forkTasks": [],
+      "startDelay": 0,
+      "joinOn": [],
+      "optional": false,
+      "defaultExclusiveJoinTask": [],
+      "asyncComplete": false,
+      "loopOver": [],
+      "onStateChange": {}
+    }
+  ],
+  "inputParameters": [
+    "question"
+  ],
+  "outputParameters": {
+    "answer": "${get_completion_ref.choices.message.content}"
+  },
+  "failureWorkflow": "",
+  "schemaVersion": 2,
+  "restartable": true,
+  "workflowStatusListenerEnabled": false,
+  "ownerEmail": "prateek18801@gmail.com",
+  "timeoutPolicy": "ALERT_ONLY",
+  "timeoutSeconds": 0,
+  "variables": {},
+  "inputTemplate": {}
+}

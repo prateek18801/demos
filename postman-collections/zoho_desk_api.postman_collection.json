@@ -1,0 +1,373 @@
+{
+	"info": {
+		"_postman_id": "51f67f81-f0a0-4692-bc34-81cfde7725c7",
+		"name": "Zoho Desk API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23533113"
+	},
+	"item": [
+		{
+			"name": "contacts/read/:id?",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL_DESK}}/api/v1/contacts",
+					"host": [
+						"{{BASE_URL_DESK}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "contacts/create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"Rohit\",\r\n    \"lastName\": \"Verma\",\r\n    \"email\": \"rv2113@gmail.com\",\r\n    \"mobile\": \"8759473648\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL_DESK}}/api/v1/contacts",
+					"host": [
+						"{{BASE_URL_DESK}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "contacts/update/:id",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"Rohit\",\r\n    \"lastName\": \"Verma\",\r\n    \"email\": \"rv2002@gmail.com\",\r\n    \"mobile\": \"8759473648\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL_DESK}}/api/v1/contacts/132498000000197027",
+					"host": [
+						"{{BASE_URL_DESK}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"contacts",
+						"132498000000197027"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "contacts/delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"contactIds\": [\"132498000000197001\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL_DESK}}/api/v1/contacts/moveToTrash",
+					"host": [
+						"{{BASE_URL_DESK}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"contacts",
+						"moveToTrash"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "tickets/read/:id?",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL_DESK}}/api/v1/tickets/132498000000184077",
+					"host": [
+						"{{BASE_URL_DESK}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"tickets",
+						"132498000000184077"
+					],
+					"query": [
+						{
+							"key": "include",
+							"value": "contacts,assignee,departments,team,isRead",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "tickets/create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"subject\": \"Created using API\",\r\n    \"departmentId\": \"132498000000010772\",\r\n    \"contactId\": \"132498000000196001\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL_DESK}}/api/v1/tickets",
+					"host": [
+						"{{BASE_URL_DESK}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"tickets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "tickets/update/:id",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"subject\": \"Updated again using API\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL_DESK}}/api/v1/tickets/132498000000197148",
+					"host": [
+						"{{BASE_URL_DESK}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"tickets",
+						"132498000000197148"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "tickets/delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"contactIds\": [\"132498000000197148\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL_DESK}}/api/v1/tickets/moveToTrash",
+					"host": [
+						"{{BASE_URL_DESK}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"tickets",
+						"moveToTrash"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "departments/read/:id?",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL_DESK}}/api/v1/departments/132498000000010772",
+					"host": [
+						"{{BASE_URL_DESK}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"departments",
+						"132498000000010772"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "authRequestParams",
+				"value": [
+					{
+						"key": "access_type",
+						"value": "offline",
+						"enabled": true,
+						"send_as": "request_url"
+					}
+				],
+				"type": "any"
+			},
+			{
+				"key": "refreshTokenUrl",
+				"value": "{{BASE_URL_AUTH}}/oauth/v2/token",
+				"type": "string"
+			},
+			{
+				"key": "scope",
+				"value": "Desk.tickets.ALL Desk.contacts.ALL Desk.settings.ALL",
+				"type": "string"
+			},
+			{
+				"key": "accessTokenUrl",
+				"value": "{{BASE_URL_AUTH}}/oauth/v2/token",
+				"type": "string"
+			},
+			{
+				"key": "authUrl",
+				"value": "{{BASE_URL_AUTH}}/oauth/v2/auth",
+				"type": "string"
+			},
+			{
+				"key": "clientSecret",
+				"value": "{{ZOHO_CLIENT_SECRET}}",
+				"type": "string"
+			},
+			{
+				"key": "clientId",
+				"value": "{{ZOHO_CLIENT_ID}}",
+				"type": "string"
+			},
+			{
+				"key": "useBrowser",
+				"value": true,
+				"type": "boolean"
+			},
+			{
+				"key": "tokenName",
+				"value": "zoho-tickets-contacts",
+				"type": "string"
+			},
+			{
+				"key": "refreshRequestParams",
+				"value": [],
+				"type": "any"
+			},
+			{
+				"key": "tokenRequestParams",
+				"value": [],
+				"type": "any"
+			},
+			{
+				"key": "challengeAlgorithm",
+				"value": "S256",
+				"type": "string"
+			},
+			{
+				"key": "grant_type",
+				"value": "authorization_code",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			},
+			{
+				"key": "client_authentication",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL_DESK",
+			"value": "https://desk.zoho.in"
+		},
+		{
+			"key": "BASE_URL_AUTH",
+			"value": "https://accounts.zoho.in"
+		},
+		{
+			"key": "ZOHO_CLIENT_ID",
+			"value": ""
+		},
+		{
+			"key": "ZOHO_CLIENT_SECRET",
+			"value": ""
+		}
+	]
+}
